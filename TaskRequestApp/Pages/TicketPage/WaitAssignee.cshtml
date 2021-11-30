@@ -1,0 +1,37 @@
+﻿@page
+@model TaskRequestApp.Pages.TicketPage.WaitAssigneeModel
+@{
+}
+
+
+<form method="post">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>subject</th>,
+                <th>description</th>
+                <th>difficulty</th>
+                <th>priority</th>
+                <th>assignee</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i=0; i < Model.TicketInput.Count; i++)
+            {
+            <tr>
+                <td>@Model.TicketInput[i].Subject</td>
+                <td>@Model.TicketInput[i].Description</td>
+                <td>@Model.TicketInput[i].Difficulty</td>
+                <td>@Model.TicketInput[i].Priority</td>
+                <td>
+                    <label>select employee</label>
+                    @Html.DropDownListFor(x => x.Id, Model.SelectListItems, "seçim yapınız", Model.TicketInput[i].employeeId)
+                    <input type="submit" value="save" asp-page-handler="Save" asp-route-ticketId="@Model.TicketInput[i].Id" />
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+</form>

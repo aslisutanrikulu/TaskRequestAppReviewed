@@ -1,0 +1,31 @@
+﻿@page
+@model TaskRequestApp.Pages.TicketPage.TechDetailsModel
+@{
+}
+<form id="1" method="post">
+    <tr>
+        <td>
+            <input asp-for="@Model.TicketInput.Subject" type="text" placeholder="subject" />
+            <input asp-for="@Model.TicketInput.Description" type="text" placeholder="description" />
+            <input asp-for="@Model.TicketInput.OpenDate" type="text" placeholder="date" />
+            <input asp-for="@Model.TicketInput.customerId" type="text" placeholder="customer" />
+        </td>
+    </tr>
+</form>
+<form id="2" method="post">
+    @foreach (var item in Enum.GetValues(typeof(Models.LevelOfDifficulty)))
+    {
+        @Html.RadioButtonFor(m => m.difficulty, item) @item.ToString();
+    }
+    <input type="submit" value="Set"  asp-page-handler="SetDifficulty" />
+    <input type="hidden" value="@Model.TicketInput.Id" asp-for="selectedTicketId" />
+</form>
+<form id="3" method="post">
+    @foreach (var item in Enum.GetValues(typeof(Models.LevelOfPriority)))
+    {
+        @Html.RadioButtonFor(m => m.priority, item) @item.ToString();
+    }
+    <input type="submit" value="onayla" asp-page-handler="SetPriority" />
+    <input type="hidden" value="@Model.TicketInput.Id" asp-for="selectedTicketId" />
+    <input type="submit" value="Save" asp-page-handler="Save" />
+</form>
